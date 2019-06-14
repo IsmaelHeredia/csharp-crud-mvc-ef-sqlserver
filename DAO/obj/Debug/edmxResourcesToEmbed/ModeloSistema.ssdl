@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sistemaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="sistemaModelStoreContainer">
+    <EntitySet Name="productos" EntityType="sistemaModel.Store.productos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="proveedores" EntityType="sistemaModel.Store.proveedores" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tipos_usuarios" EntityType="sistemaModel.Store.tipos_usuarios" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="usuarios" EntityType="sistemaModel.Store.usuarios" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="fk_productos" Association="sistemaModel.Store.fk_productos">
+      <End Role="proveedores" EntitySet="proveedores" />
+      <End Role="productos" EntitySet="productos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_usuarios" Association="sistemaModel.Store.fk_usuarios">
+      <End Role="tipos_usuarios" EntitySet="tipos_usuarios" />
+      <End Role="usuarios" EntitySet="usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="productos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="100" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="100" />
+    <Property Name="precio" Type="float" />
+    <Property Name="id_proveedor" Type="int" />
+    <Property Name="fecha_registro" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="proveedores">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="100" />
+    <Property Name="direccion" Type="nvarchar" MaxLength="100" />
+    <Property Name="telefono" Type="int" />
+    <Property Name="fecha_registro" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tipos_usuarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="usuarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="100" />
+    <Property Name="clave" Type="nvarchar" MaxLength="100" />
+    <Property Name="id_tipo" Type="int" />
+    <Property Name="fecha_registro" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="fk_productos">
+    <End Role="proveedores" Type="sistemaModel.Store.proveedores" Multiplicity="0..1" />
+    <End Role="productos" Type="sistemaModel.Store.productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="proveedores">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="productos">
+        <PropertyRef Name="id_proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_usuarios">
+    <End Role="tipos_usuarios" Type="sistemaModel.Store.tipos_usuarios" Multiplicity="0..1" />
+    <End Role="usuarios" Type="sistemaModel.Store.usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipos_usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="usuarios">
+        <PropertyRef Name="id_tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

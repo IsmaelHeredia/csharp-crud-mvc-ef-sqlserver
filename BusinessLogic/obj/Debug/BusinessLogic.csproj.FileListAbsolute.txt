@@ -1,0 +1,12 @@
+C:\Users\Sin Decidir\Desktop\Biblioteca de códigos\Fenix Labs\Contenido\C#\Aplicacion Web con SQL Server con EF\Sistema\BusinessLogic\bin\Debug\BusinessLogic.dll
+C:\Users\Sin Decidir\Desktop\Biblioteca de códigos\Fenix Labs\Contenido\C#\Aplicacion Web con SQL Server con EF\Sistema\BusinessLogic\bin\Debug\BusinessLogic.pdb
+C:\Users\Sin Decidir\Desktop\Biblioteca de códigos\Fenix Labs\Contenido\C#\Aplicacion Web con SQL Server con EF\Sistema\BusinessLogic\bin\Debug\DAO.dll
+C:\Users\Sin Decidir\Desktop\Biblioteca de códigos\Fenix Labs\Contenido\C#\Aplicacion Web con SQL Server con EF\Sistema\BusinessLogic\bin\Debug\Entities.dll
+C:\Users\Sin Decidir\Desktop\Biblioteca de códigos\Fenix Labs\Contenido\C#\Aplicacion Web con SQL Server con EF\Sistema\BusinessLogic\bin\Debug\EntityFramework.dll
+C:\Users\Sin Decidir\Desktop\Biblioteca de códigos\Fenix Labs\Contenido\C#\Aplicacion Web con SQL Server con EF\Sistema\BusinessLogic\bin\Debug\DAO.pdb
+C:\Users\Sin Decidir\Desktop\Biblioteca de códigos\Fenix Labs\Contenido\C#\Aplicacion Web con SQL Server con EF\Sistema\BusinessLogic\bin\Debug\Entities.pdb
+C:\Users\Sin Decidir\Desktop\Biblioteca de códigos\Fenix Labs\Contenido\C#\Aplicacion Web con SQL Server con EF\Sistema\BusinessLogic\bin\Debug\EntityFramework.xml
+C:\Users\Sin Decidir\Desktop\Biblioteca de códigos\Fenix Labs\Contenido\C#\Aplicacion Web con SQL Server con EF\Sistema\BusinessLogic\bin\Debug\es\EntityFramework.resources.dll
+C:\Users\Sin Decidir\Desktop\Biblioteca de códigos\Fenix Labs\Contenido\C#\Aplicacion Web con SQL Server con EF\Sistema\BusinessLogic\obj\Debug\BusinessLogic.csprojResolveAssemblyReference.cache
+C:\Users\Sin Decidir\Desktop\Biblioteca de códigos\Fenix Labs\Contenido\C#\Aplicacion Web con SQL Server con EF\Sistema\BusinessLogic\obj\Debug\BusinessLogic.dll
+C:\Users\Sin Decidir\Desktop\Biblioteca de códigos\Fenix Labs\Contenido\C#\Aplicacion Web con SQL Server con EF\Sistema\BusinessLogic\obj\Debug\BusinessLogic.pdb

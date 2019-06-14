@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sistemaModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="sistemaEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="productos" EntityType="sistemaModel.Producto" />
+    <EntitySet Name="proveedores" EntityType="sistemaModel.Proveedor" />
+    <EntitySet Name="tipos_usuarios" EntityType="sistemaModel.TipoUsuario" />
+    <EntitySet Name="usuarios" EntityType="sistemaModel.Usuario" />
+    <AssociationSet Name="fk_productos" Association="sistemaModel.fk_productos">
+      <End Role="proveedores" EntitySet="proveedores" />
+      <End Role="productos" EntitySet="productos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_usuarios" Association="sistemaModel.fk_usuarios">
+      <End Role="tipos_usuarios" EntitySet="tipos_usuarios" />
+      <End Role="usuarios" EntitySet="usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="descripcion" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="precio" Type="Double" />
+    <Property Name="id_proveedor" Type="Int32" />
+    <Property Name="fecha_registro" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="proveedor" Relationship="sistemaModel.fk_productos" FromRole="productos" ToRole="proveedores" />
+  </EntityType>
+  <EntityType Name="Proveedor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="direccion" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="telefono" Type="Int32" />
+    <Property Name="fecha_registro" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="producto" Relationship="sistemaModel.fk_productos" FromRole="proveedores" ToRole="productos" />
+  </EntityType>
+  <EntityType Name="TipoUsuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="usuario" Relationship="sistemaModel.fk_usuarios" FromRole="tipos_usuarios" ToRole="usuarios" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="clave" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="id_tipo" Type="Int32" />
+    <Property Name="fecha_registro" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="tipo" Relationship="sistemaModel.fk_usuarios" FromRole="usuarios" ToRole="tipos_usuarios" />
+  </EntityType>
+  <Association Name="fk_productos">
+    <End Role="proveedores" Type="sistemaModel.Proveedor" Multiplicity="0..1" />
+    <End Role="productos" Type="sistemaModel.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="proveedores">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="productos">
+        <PropertyRef Name="id_proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_usuarios">
+    <End Role="tipos_usuarios" Type="sistemaModel.TipoUsuario" Multiplicity="0..1" />
+    <End Role="usuarios" Type="sistemaModel.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipos_usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="usuarios">
+        <PropertyRef Name="id_tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

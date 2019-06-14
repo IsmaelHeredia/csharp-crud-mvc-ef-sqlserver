@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="sistemaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="sistemaModelStoreContainer">
+          <EntitySet Name="productos" EntityType="sistemaModel.Store.productos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="proveedores" EntityType="sistemaModel.Store.proveedores" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tipos_usuarios" EntityType="sistemaModel.Store.tipos_usuarios" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="usuarios" EntityType="sistemaModel.Store.usuarios" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="fk_productos" Association="sistemaModel.Store.fk_productos">
+            <End Role="proveedores" EntitySet="proveedores" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuarios" Association="sistemaModel.Store.fk_usuarios">
+            <End Role="tipos_usuarios" EntitySet="tipos_usuarios" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="precio" Type="float" />
+          <Property Name="id_proveedor" Type="int" />
+          <Property Name="fecha_registro" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="proveedores">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="100" />
+          <Property Name="telefono" Type="int" />
+          <Property Name="fecha_registro" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tipos_usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="clave" Type="nvarchar" MaxLength="100" />
+          <Property Name="id_tipo" Type="int" />
+          <Property Name="fecha_registro" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="fk_productos">
+          <End Role="proveedores" Type="sistemaModel.Store.proveedores" Multiplicity="0..1" />
+          <End Role="productos" Type="sistemaModel.Store.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="id_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuarios">
+          <End Role="tipos_usuarios" Type="sistemaModel.Store.tipos_usuarios" Multiplicity="0..1" />
+          <End Role="usuarios" Type="sistemaModel.Store.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipos_usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sistemaModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="sistemaEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="productos" EntityType="sistemaModel.Producto" />
+          <EntitySet Name="proveedores" EntityType="sistemaModel.Proveedor" />
+          <EntitySet Name="tipos_usuarios" EntityType="sistemaModel.TipoUsuario" />
+          <EntitySet Name="usuarios" EntityType="sistemaModel.Usuario" />
+          <AssociationSet Name="fk_productos" Association="sistemaModel.fk_productos">
+            <End Role="proveedores" EntitySet="proveedores" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuarios" Association="sistemaModel.fk_usuarios">
+            <End Role="tipos_usuarios" EntitySet="tipos_usuarios" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="precio" Type="Double" />
+          <Property Name="id_proveedor" Type="Int32" />
+          <Property Name="fecha_registro" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="proveedor" Relationship="sistemaModel.fk_productos" FromRole="productos" ToRole="proveedores" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="telefono" Type="Int32" />
+          <Property Name="fecha_registro" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="producto" Relationship="sistemaModel.fk_productos" FromRole="proveedores" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="usuario" Relationship="sistemaModel.fk_usuarios" FromRole="tipos_usuarios" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="clave" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="id_tipo" Type="Int32" />
+          <Property Name="fecha_registro" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tipo" Relationship="sistemaModel.fk_usuarios" FromRole="usuarios" ToRole="tipos_usuarios" />
+        </EntityType>
+        <Association Name="fk_productos">
+          <End Role="proveedores" Type="sistemaModel.Proveedor" Multiplicity="0..1" />
+          <End Role="productos" Type="sistemaModel.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="id_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuarios">
+          <End Role="tipos_usuarios" Type="sistemaModel.TipoUsuario" Multiplicity="0..1" />
+          <End Role="usuarios" Type="sistemaModel.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipos_usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sistemaModelStoreContainer" CdmEntityContainer="sistemaEntities">
+          <EntitySetMapping Name="productos">
+            <EntityTypeMapping TypeName="sistemaModel.Producto">
+              <MappingFragment StoreEntitySet="productos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="proveedores">
+            <EntityTypeMapping TypeName="sistemaModel.Proveedor">
+              <MappingFragment StoreEntitySet="proveedores">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipos_usuarios">
+            <EntityTypeMapping TypeName="sistemaModel.TipoUsuario">
+              <MappingFragment StoreEntitySet="tipos_usuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="sistemaModel.Usuario">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="id_tipo" ColumnName="id_tipo" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
