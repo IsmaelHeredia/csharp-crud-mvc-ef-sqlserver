@@ -1,0 +1,55 @@
+﻿@model Entities.Proveedor
+
+@{
+    ViewBag.Title = "Proveedores";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="panel contenedor panel-default">
+    <div class="panel-heading">Editando al proveedor @Model.nombre</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("GrabarEditar", "Proveedores", FormMethod.Post, new { @class = "form-horizontal", @id = "proveedorForm", @role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend>Datos</legend>
+                @Html.HiddenFor( model => model.id)
+                <div class="form-group" name="form-group-nombre">
+                    @Html.LabelFor(model => model.nombre, "Nombre", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @placeholder = "Ingrese nombre" } )
+                    </div>
+                </div>
+                <div class="form-group" name="form-group-direccion">
+                    @Html.LabelFor(model => model.direccion, "Dirección", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(model => model.direccion, new { @class = "form-control", @placeholder = "Ingrese dirección" } )
+                    </div>
+                </div>
+                <div class="form-group" name="form-group-telefono">
+                    @Html.LabelFor(model => model.telefono, "Teléfono", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(model => model.telefono, new { @class = "form-control", @placeholder = "Ingrese teléfono" })
+                    </div>
+                </div>
+		        <div class="col-md-4 col-md-offset-4">
+			        <div class="btn-group">
+				        <div class="col-xs-6">
+					        <button type="submit" class="btn btn-primary button_class center-block" name="editar_proveedor" id="editar_proveedor"><span class="glyphicon glyphicon-pencil right_space"></span>Editar</button>
+				        </div>
+				        <div class="col-xs-6">
+					        <a href="@Url.Action("Index","Proveedores")" class="btn btn-primary button_class center-block" role="button"><span class="glyphicon glyphicon-arrow-left right_space"></span>Volver</a>
+				        </div>
+			        </div>
+		        </div>
+            </fieldset>
+            }
+    </div>
+</div>
+
+@{
+    if(ViewBag.mensaje != null) {
+        @Html.Raw(ViewBag.mensaje);
+    }
+
+}

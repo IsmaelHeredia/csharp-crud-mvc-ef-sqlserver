@@ -1,0 +1,26 @@
+﻿@model Entities.Producto
+
+@{
+    ViewBag.Title = "Productos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="jumbotron">
+    @using (Html.BeginForm("Borrar", "Productos", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <fieldset>
+            <div class="col-md-4 col-md-offset-4">
+                @Html.HiddenFor( model => model.id)
+                <h1 class="text-center">Eliminacíon</h1>
+                <p class="text-center">¿Estás seguro que deseas eliminar al producto @Model.nombre ?</p>
+                <div class="col-xs-6 text-left">
+                    <button type="submit" name="borrar_producto" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-trash right_space"></span>Borrar</button>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <a class="btn btn-primary btn-block" href="@Url.Action("Listar", "Productos")"><span class="glyphicon glyphicon-arrow-left right_space"></span>Volver</a>
+                </div>
+            </div>
+        </fieldset>
+        }
+</div>

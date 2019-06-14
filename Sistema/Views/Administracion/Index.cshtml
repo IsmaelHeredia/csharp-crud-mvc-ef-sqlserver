@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Administración";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    string tipo_usuario = ViewBag.tipo_usuario;
+    string usuario = ViewBag.usuario;
+    
+}
+
+<center>
+    <h1>
+        <font color="white">Bienvenido a la administración @tipo_usuario @usuario</font>
+    </h1>
+</center>
+
+@{
+    if(ViewBag.mensaje != null) {
+        @Html.Raw(ViewBag.mensaje);
+    }
+
+}

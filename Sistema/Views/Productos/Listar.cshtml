@@ -1,0 +1,88 @@
+﻿@model List<Entities.Producto>
+
+@{
+    ViewBag.Title = "Productos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    int cantidad_productos = 0;
+    if (ViewBag.cantidad_productos != null)
+    {
+        cantidad_productos = ViewBag.cantidad_productos;
+    }
+    
+}
+
+<div class="panel contenedor panel-default">
+    <div class="panel-heading">Productos encontrados : @cantidad_productos</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Listar", "Productos", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-lg-2">
+                        <a href="@Url.Action("Agregar", "Productos")" class="btn btn-primary btn-block" role="button"><span class="glyphicon glyphicon-plus right_space"></span>Agregar</a>
+                    </div>
+                    <div class="col-lg-9">
+                        <input class="form-control" id="inputBuscar" placeholder="Ingrese nombre a buscar" name="nombre_buscar" type="text" />
+                    </div>
+                    <div class="col-lg-1">
+                        <button type="submit" name="busqueda" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-search"></button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+
+@if (Model.Count == 0)
+    {
+        <center><b>No se encontraron productos</b></center>
+    }
+    else
+    {
+        <div class="panel contenedor panel-default">
+            <div class="panel-heading">Productos encontrados : @Model.Count</div>
+            <div class="panel-body">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th class="fila_producto">Nombre</th>
+                            <th class="fila_producto">Descripción</th>
+                            <th class="fila_producto">Precio</th>
+                            <th class="fila_producto">Proveedor</th>
+                            <th class="fila_producto">Registro</th>
+                            <th class="fila_producto">Opción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var producto in Model)
+                        {
+                            <tr>
+                                <td class="filterable-cell fila_producto">@producto.nombre</td>
+                                <td class="filterable-cell fila_producto">@producto.descripcion</td>
+                                <td class="filterable-cell fila_producto">@producto.precio</td>
+                                <td class="filterable-cell fila_producto">@producto.proveedor.nombre</td>
+                                <td class="filterable-cell fila_producto">@producto.fecha_registro</td>
+                                <td class="filterable-cell fila_producto">
+                                    <a href="/Administracion/Productos/Editar/@producto.id">
+                                        <img data-toggle="tooltip" src="@Url.Content("~/Content/images/edit.png")" title="Editar"/>
+                                    </a>
+                                    <a href="/Administracion/Productos/Borrar/@producto.id">
+                                        <img data-toggle="tooltip" src="@Url.Content("~/Content/images/delete.png")" title="Borrar"/>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+}
+    
+@{
+    if(ViewBag.mensaje != null) {
+        @Html.Raw(ViewBag.mensaje);
+    }
+
+}

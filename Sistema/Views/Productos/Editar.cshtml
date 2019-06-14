@@ -1,0 +1,64 @@
+﻿@model Entities.Producto
+
+@{
+    ViewBag.Title = "Productos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    List<Entities.Proveedor> proveedores = ViewBag.proveedores;
+}
+
+<div class="panel contenedor panel-default">
+    <div class="panel-heading">Editando al producto @Model.nombre</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("GrabarEditar", "Productos", FormMethod.Post, new { @class = "form-horizontal", @id = "productoForm", @role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend>Datos</legend>
+                @Html.HiddenFor( model => model.id)
+                <div class="form-group" name="form-group-nombre">
+                    @Html.LabelFor(model => model.nombre, "Nombre", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @placeholder = "Ingrese nombre" } )
+                    </div>
+                </div>
+                <div class="form-group" name="form-group-descripcion">
+                    @Html.LabelFor(model => model.descripcion, "Descripción", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", @rows = "3", @placeholder = "Ingrese descripción" })
+                    </div>
+                </div>
+                <div class="form-group" name="form-group-precio">
+                    @Html.LabelFor(model => model.precio, "Precio", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(model => model.precio, new { @class = "form-control", @placeholder = "Ingrese precio" })
+                    </div>
+                </div>
+                <div class="form-group" name="form-group-proveedor">
+                    @Html.LabelFor(model => model.id_proveedor, "Proveedor", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(model => model.id_proveedor, new SelectList(proveedores.AsEnumerable(), "id", "nombre"), "-- Seleccione proveedor --", new { @class = "form-control" })
+                    </div>
+                </div>
+		        <div class="col-md-4 col-md-offset-4">
+			        <div class="btn-group">
+				        <div class="col-xs-6">
+					        <button type="submit" class="btn btn-primary button_class center-block" name="editar_producto" id="editar_producto"><span class="glyphicon glyphicon-pencil right_space"></span>Editar</button>
+				        </div>
+				        <div class="col-xs-6">
+					        <a href="@Url.Action("Index","Productos")" class="btn btn-primary button_class center-block" role="button"><span class="glyphicon glyphicon-arrow-left right_space"></span>Volver</a>
+				        </div>
+			        </div>
+		        </div>
+            </fieldset>
+            }
+
+    </div>
+</div>
+          
+@{
+    if(ViewBag.mensaje != null) {
+        @Html.Raw(ViewBag.mensaje);
+    }
+
+}

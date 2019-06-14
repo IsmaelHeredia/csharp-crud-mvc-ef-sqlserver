@@ -1,0 +1,47 @@
+﻿@model Entities.CambiarClave
+
+@{
+    ViewBag.Title = "Cambiar Clave";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="panel contenedor panel-default">
+    <div class="panel-heading">Cambiar Clave</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("CambiarClave", "Cuenta", FormMethod.Post, new { @class = "form-horizontal", @id = "cambiarClaveForm", @role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend>Datos</legend>
+                <div class="form-group" name="form-group-usuario">
+                    @Html.LabelFor(model => model.usuario, "Usuario", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(model => model.usuario, new { @class = "form-control", @placeholder = "Ingrese usuario", @readonly = "readonly" } )
+                    </div>
+                </div>
+                <div class="form-group" name="form-group-clave">
+                    @Html.LabelFor(model => model.clave, "Actual clave", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.PasswordFor(model => model.clave, new { @class = "form-control", @placeholder = "Ingrese clave" } )
+                    </div>
+                </div>
+                <div class="form-group" name="form-group-nueva-clave">
+                    @Html.LabelFor(model => model.nueva_clave, "Nueva clave", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.PasswordFor(model => model.nueva_clave, new { @class = "form-control", @placeholder = "Ingrese nueva clave" } )
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary button_class center-block" name="cambiar_clave" id="cambiar_clave"><span class="glyphicon glyphicon-pencil right_space"></span>Cambiar</button>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+
+@{
+    if(ViewBag.mensaje != null) {
+        @Html.Raw(ViewBag.mensaje);
+    }
+
+}

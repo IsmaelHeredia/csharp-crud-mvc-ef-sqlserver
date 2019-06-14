@@ -1,0 +1,42 @@
+﻿@model Entities.Login
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="panel login panel-default">
+    <div class="panel-heading">Login</div>
+    <div class="panel-body">
+        @using(Html.BeginForm("IngresoUsuario","Login",FormMethod.Post,new { @class = "form-horizontal", @id = "loginForm", @role = "form" })) {
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend>Datos</legend>
+                <div class="form-group" name="form-group-usuario">
+                    @Html.LabelFor(model => model.usuario, "Usuario", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(model => model.usuario, new { @class = "form-control", @placeholder = "Ingrese usuario" } )
+                    </div>
+                </div>
+                <div class="form-group" name="form-group-clave">
+                    @Html.LabelFor(model => model.clave, "Clave", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.PasswordFor(model => model.clave, new { @class = "form-control", @placeholder = "Ingrese clave" } )
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-4">
+                        <button type="submit" name="Ingresar" id="ingresar" class="btn btn-primary btn-block">Ingresar</button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+
+@{
+    if(ViewBag.mensaje != null) {
+        @Html.Raw(ViewBag.mensaje);
+    }
+
+}

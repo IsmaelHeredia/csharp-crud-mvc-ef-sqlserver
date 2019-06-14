@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/Content/Scripts")
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grupped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a class="navbar-brand" href="#">Administración</a>
+                </div>
+                <!-- Collect the nav, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="defaultNavbar1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="@Url.Action("Index","Administracion")" name="inicio"><span class="glyphicon glyphicon-home right_space"></span>Inicio<span class="sr-only">(current)</span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-th right_space"></span>Gestionar <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="@Url.Action("Index","Productos")" name="productos">Productos</a></li>
+                                <li><a href="@Url.Action("Index","Proveedores")" name="proveedores">Proveedores</a></li>
+                                <li><a href="@Url.Action("Index","Usuarios")" name="usuarios">Usuarios</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-stats right_space"></span>Estadísticas <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="@Url.Action("Index","Estadisticas")" name="visualizar_reporte">Visualizar Reporte</a></li>
+                                <li><a href="@Url.Action("Descargar","Estadisticas")" name="descargar_reporte">Descargar Reporte</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown user-dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user right_space"></span>@ViewBag.usuario<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("CambiarUsuario","Cuenta")" name="cambiar_usuario">Cambiar Usuario</a></li>
+                                <li><a href="@Url.Action("CambiarClave","Cuenta")" name="cambiar_clave">Cambiar Clave</a></li>
+                                <li class="divider"></li>
+                                <li><a href="@Url.Action("LogOut", "Login")">Salir</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h1 class="text-center">Administración</h1>
+                </div>
+            </div>
+            <hr />
+            <br /><br />
+            @RenderBody()
+            <br /><br />
+            <hr />
+        </div>
+      <div id="footer">
+        <div class="container text-center">
+          <h4>Footer </h4>
+          <p>Copyright &copy; 2015 &middot; All Rights Reserved &middot; <a href="http://yourwebsite.com/" >My Website</a></p>
+        </div>
+      </div>
+    </body>
+</html>

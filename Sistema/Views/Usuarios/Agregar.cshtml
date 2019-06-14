@@ -1,0 +1,56 @@
+﻿@model Entities.Usuario
+
+@{
+    ViewBag.Title = "Usuarios";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    
+    List<Entities.TipoUsuario> tipos = ViewBag.tipos;
+}
+
+<div class="panel contenedor panel-default">
+    <div class="panel-heading">Agregar Usuario</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Agregar", "Usuarios", FormMethod.Post, new { @class = "form-horizontal", @id = "usuarioForm", @role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend>Datos</legend>
+                <div class="form-group" name="form-group-nombre">
+                    @Html.LabelFor(model => model.nombre, "Nombre", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @placeholder = "Ingrese nombre" } )
+                    </div>
+                </div>
+                <div class="form-group" name="form-group-password">
+                    @Html.LabelFor(model => model.clave, "Clave", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.PasswordFor(model => model.clave, new { @class = "form-control", @placeholder = "Ingrese clave" } )
+                    </div>
+                </div>
+                <div class="form-group" name="form-group-tipo">
+                    @Html.LabelFor(model => model.id_tipo, "Tipo", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(model => model.id_tipo, new SelectList(tipos.AsEnumerable(), "id", "nombre"), "-- Seleccione tipo --", new { @class = "form-control" })
+                    </div>
+                </div>
+		        <div class="col-md-4 col-md-offset-4">
+			        <div class="btn-group">
+				        <div class="col-xs-6">
+					        <button type="submit" class="btn btn-primary button_class center-block" name="agregar_usuario" id="agregar_usuario"><span class="glyphicon glyphicon-plus right_space"></span>Agregar</button>
+				        </div>
+				        <div class="col-xs-6">
+					        <a href="@Url.Action("Index","Usuarios")" class="btn btn-primary button_class center-block" role="button"><span class="glyphicon glyphicon-arrow-left right_space"></span>Volver</a>
+				        </div>
+			        </div>
+		        </div>
+            </fieldset>
+            }
+    </div>
+</div>
+
+@{
+    if(ViewBag.mensaje != null) {
+        @Html.Raw(ViewBag.mensaje);
+    }
+
+}
